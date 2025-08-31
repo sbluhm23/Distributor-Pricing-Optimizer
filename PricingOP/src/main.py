@@ -41,7 +41,8 @@ def test_load_demand(tmp_path):
 # This is a dictionary of dictionaries, where each distributor has its own products
 # Each product is represented by a dictionary with its attributes
 
-# one mega dictionary will hold all distributor data 
+# one mega dictionary will hold all distributor data Test
+#ship should be in shipping price per unit if discounts are offered
 distributors = dict({
     "DistributorTestA": {
         "a": {
@@ -90,13 +91,7 @@ ship = {(d,t): distributors[d][t]["ship_unit"] for d,t in items}#pulls shipping 
 stock = {(d,t): distributors[d][t]["current_stock"] for d,t in items}#pulls current stock
 
 margin = {(d,t): sell[d,t] - buy[d,t] - ship[d,t] for d,t in items}# Grabs the margin for each 
-
-
-
-#Objective function maximize profits
-# 4 products so 4 variables, w,x,y,z In the final problem we may stucture this differently
-##for multiple products we can use indices 
-
+ 
 model = pulp.LpProblem("profit_max", pulp.LpMaximize) #create model to maximize profits
 #make decisions variables
 
@@ -117,5 +112,5 @@ model.solve(pulp.PULP_CBC_CMD(msg=False))
 
 solution = { (d,t): int(q[(d,t)].value()) for d,t in items if q[(d,t)].value() and q[(d,t)].value() > 1e-6 }
 profit = pulp.value(model.objective)
-print("Buy plan:", solution)
-print("Profit: $", round(profit, 2))
+print("Buy plan:", solution) #how many to order from each distributor and what items
+print("Profit: $", round(profit, 2)) # 
