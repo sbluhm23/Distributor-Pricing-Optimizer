@@ -21,8 +21,12 @@ Generate simple solutions within console
 Create user GUI to input other date
 """
 
+def main():
+    return (solution, profit)
 
 
+if __name__ == "__main__":
+    main()
 
 def load_demand(path: Path) -> pd.DataFrame:
     """Read an excel or csv demand file and return
@@ -112,5 +116,4 @@ model.solve(pulp.PULP_CBC_CMD(msg=False))
 
 solution = { (d,t): int(q[(d,t)].value()) for d,t in items if q[(d,t)].value() and q[(d,t)].value() > 1e-6 }
 profit = pulp.value(model.objective)
-print("Buy plan:", solution) #how many to order from each distributor and what items
-print("Profit: $", round(profit, 2)) # 
+
