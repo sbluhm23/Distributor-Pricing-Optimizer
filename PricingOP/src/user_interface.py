@@ -2,17 +2,21 @@
 
 import FreeSimpleGUI as sg
 import main # Assuming main.py is in the same directory and contains the optimization logic
-
+import data_parse
 
 right_click_def = ['hi', ':)', 'test']
+websites_data = data_parse.get_websites() #pulls current websites from data_parse file
+websites_list = ''
+for value in websites_data.values(): #pulls specifically the website urls 
+    websites_list += f"{value}\n"
 
 # Define the window's contents
-layout_start = [[sg.Text('Distributor Order Optimizer'), sg.Radio('Option 1', 'RADIO1', default=True), sg.Radio('Option 2', 'RADIO1')],
-          [sg.Multiline('Select an option \nTesting\n', size=(40,10), key='-MLINE-')],
-          [sg.Button('Solve'), sg.Button('List'), sg.Button('Quit')]]
+layout_start = [[sg.Text('Distributor Order Optimizer')],
+          [sg.Multiline(websites_list, size=(40,10), key='-MLINE-')],
+          [sg.Button('Solve'), sg.Button('Add'), sg.Button('Remove'),sg.Button('Quit')]]
 
 
-sg.theme('dark purple 6') #i also like dark green 1
+sg.theme('dark purple 6') #i also like dark green 1 #user can change theme later
 
 
 # Create the window
@@ -30,6 +34,11 @@ while True:
         sg.popup(f"Solution: {solution[0]}\nProfit: ${round(solution[1],2)}")
         layout_start = [[sg.Text(solution), sg.Text(size=(15,1))],
             [sg.Button('Quit')]]
+        #I want to also add it so that when you hit solve it will 
+        #ask the user if they want to filter specific products or categories
+        #and then it will only show those products in the solution
+        #maybe a popup with a checklist of categories/products?
+
 
     if event == 'List':
         pass

@@ -1,23 +1,37 @@
 """ 
 File to parse and process data into readable dictionaries for pricing optimizations
+We can check the robots.txt file of each website to see what data we can scrape
+For example, https://www.homedepot.com/robots.txt
+and https://www.lowes.com/robots.txt
+We can use BeautifulSoup and requests to scrape the data
+change check
 
 """
 
 import requests
 import pandas as pd
 import numpy as np 
+from bs4 import BeautifulSoup as bs
+import json
 
+print("hi")
+
+
+def main():
+    pass
+
+if __name__ == "__data_parse__":
+    main()
 
 #--- TESTS ---
-extra = True
 websites = {"Dist A": "www.testA.com", "Dist B": "www.testB.com"}
+#response = requests.get("website goes here")
+
+def get_websites():
+    return websites
 
 
-response = requests.get("website goes here")
-
-
-
-if response.status_code == 200: #checks request 
+"""if response.status_code == 200: #checks request 
     print("Success! Fetching Data...")
     data = response.json()
 else:
@@ -67,3 +81,4 @@ class WebsiteManager:
 
     def build_data(self): #this puts data into dictionary
         pass
+"""
